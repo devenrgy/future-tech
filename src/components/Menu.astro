@@ -1,0 +1,15 @@
+---
+const { class: className } = Astro.props
+---
+
+<button
+	class='relative top-1 flex size-14 flex-col justify-center gap-2 p-2'
+	class:list={className}
+	type='button'
+	title='Menu'
+	aria-label='Open Menu'
+>
+	<span class='h-1 w-full rounded bg-white'></span>
+	<span class='h-1 w-full rounded bg-white'></span>
+	<span class='h-1 w-1/2 self-end rounded bg-white'></span>
+</button>

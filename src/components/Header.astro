@@ -1,0 +1,57 @@
+---
+import { siteConfig } from '@/config/site'
+import Menu from './Menu.astro'
+
+const path = Astro.url.pathname
+---
+
+<header class='border-b border-b-border'>
+	<a
+		href='/'
+		class='block text-balance border-b border-b-border px-2 text-center transition-colors duration-200 ~text-sm/lg ~pt-10/5 ~pb-4/5 after:relative after:inline-block after:bg-[url(/icons/arrow.svg)] after:align-middle after:~size-5/6 hover:text-accent'
+	>
+		Subscribe to&nbsp;Our Newsletter for the Latest Blogs and Resources
+	</a>
+
+	<div class='bg-background-light ~py-5/7'>
+		<div class='container flex items-center justify-between gap-x-2'>
+			<a href='/' class='~h-9/12 ~w-32/44' class:list={{ 'pointer-events-none': path === '/' }}>
+				<img src='/icons/logo.svg' alt='Future Tech Logo' />
+			</a>
+
+			<nav class='hidden md:block'>
+				<ul role='list' class='flex ~text-sm/lg ~gap-x-1/4'>
+					{
+						siteConfig.navItems.map(({ label, href }) => (
+							<li>
+								<a
+									class='transition-colors duration-200 ~px-4/6 ~py-2/4 hover:text-accent'
+									class:list={{
+										'pointer-events-none rounded-lg border border-border bg-background-dark font-medium text-white':
+											path === href
+									}}
+									href={href}
+								>
+									{label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			{
+				siteConfig.navMenuItems.map(({ label, href }) => (
+					<a
+						class='hidden whitespace-nowrap rounded-lg bg-accent font-medium capitalize text-black transition-colors duration-200 ~text-sm/lg ~px-4/5 ~py-2/4 hover:bg-accent/90 md:block'
+						href={href}
+					>
+						{label}
+					</a>
+				))
+			}
+
+			<Menu class='md:hidden' />
+		</div>
+	</div>
+</header>
