@@ -1,0 +1,53 @@
+---
+import { FOOTER_NAV_ITEMS } from '@/lib/constants'
+import Socials from './Socials.astro'
+---
+
+<footer class='border-t border-border ~text-sm/lg'>
+	<ul class='container grid grid-cols-2 gap-x-3 gap-y-5 ~py-10/20 md:grid-cols-3 lg:grid-cols-5'>
+		{
+			FOOTER_NAV_ITEMS.map(({ title, href, categories }, index) => (
+				<li class='group row-span-2 grid grid-rows-subgrid ~gap-y-4/9 last:col-span-2 lg:last:col-span-1'>
+					<a class='font-medium text-white transition-colors duration-200 ~text-base/xl hover:text-accent' href={href}>
+						{title}
+					</a>
+
+					<ul class='flex-wrap ~space-y-2/5 group-last:flex group-last:gap-3 group-last:space-y-0 lg:group-last:block lg:group-last:space-y-5'>
+						{categories.map(({ href, label, isNew }) => (
+							<li
+								class:list={{
+									"after:content-['New'] hidden sm:block after:text-white after:~text-xs/base after:py-1 after:px-3 after:border-border after:border after:rounded-md after:ml-2":
+										isNew
+								}}
+							>
+								<a
+									class='inline-flex items-center gap-x-1 transition-colors duration-200 hover:text-accent'
+									class:list={{
+										'rounded-lg border border-border capitalize ~px-3/4 ~py-2/3 hover:text-primary hover:bg-primary/10 after:relative after:inline-block after:bg-[url(/icons/angle-arrow.svg)] after:align-middle after:~size-5/6':
+											FOOTER_NAV_ITEMS.length - 1 === index
+									}}
+									href={href}
+								>
+									{label}
+								</a>
+							</li>
+						))}
+					</ul>
+				</li>
+			))
+		}
+	</ul>
+
+	<ul class='container flex flex-col items-center justify-between gap-y-5 border-t border-border ~py-6/10 md:flex-row'>
+		<li class='order-2 flex divide-x divide-border *:px-2 first:*:pl-0 last:*:pr-0 md:order-1'>
+			<a class='transition-colors duration-200 hover:text-accent' href='/'>Terms & Conditions</a>
+			<a class='transition-colors duration-200 hover:text-accent' href='/'>Privacy Policy</a>
+		</li>
+
+		<li class='order-1 md:order-2'>
+			<Socials />
+		</li>
+
+		<li class='order-3 md:order-3'>&copy;&nbsp;2024&nbsp;FutureTech. All rights reserved.</li>
+	</ul>
+</footer>
